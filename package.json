@@ -1,0 +1,6 @@
+{
+    "name": "crypto-ticker",
+    "dependencies": {
+        "rpi-led-matrix": "^1.11.1"
+    }
+}
