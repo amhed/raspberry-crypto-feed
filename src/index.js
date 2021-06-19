@@ -1,1 +1,1 @@
-require('./examples/scratch')
+require('./ticker')
