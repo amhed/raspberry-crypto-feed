@@ -5,20 +5,20 @@ const { matrixOptions, runtimeOptions } = require('./_config');
 const { Colors, defaultFont } = require('./constants')
 const { useStatusBar } = require('./components/StatusBar');
 const { setTickerDisplay } = require('./components/TickerDisplay');
-const { resetScreen, pauseFor } = require('./helpers');
+const { registerExitHandler, resetScreen, pauseFor } = require('./helpers');
+const _ = require('lodash');
 
 // Start "game loop" 
 (async () => {
   const matrix = new LedMatrix(matrixOptions, runtimeOptions);
-  const { setStatus } = useStatusBar(matrix);
-
-  // Reset the matrix on each start.
-  // Helps with flickering during hot reload.
+  registerExitHandler(matrix);
+  
   resetScreen(matrix);
+  const { setStatus } = useStatusBar(matrix);
 
   const nextTick = async () => {
     // get current price for ticker
-    setTickerDisplay(matrix, 'BTC', 34500);
+    setTickerDisplay(matrix, 'BTC', _.random(30000, 35000));
     
     // update status bar until next update
     setStatus(0);

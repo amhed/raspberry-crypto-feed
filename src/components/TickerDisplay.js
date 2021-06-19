@@ -3,8 +3,9 @@ const { Colors, defaultFont } = require('../constants');
 const { BigNumber } = require('bignumber.js');
 
 const setTickerDisplay = (matrix, ticker, price) => {
+  const formattedPrice = new BigNumber(price).toFormat(0);
   const lines = LayoutUtils.textToLines(
-    defaultFont, matrix.width(), `${ticker} ${new BigNumber(price).toFormat(0)}`
+    defaultFont, matrix.width(), `${ticker} ${formattedPrice}`
   )
 
   LayoutUtils.linesToMappedGlyphs(

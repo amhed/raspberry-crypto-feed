@@ -9,7 +9,7 @@ const useStatusBar = (matrix) => {
     width = Math.round(matrix.width() * pct);
     matrix
       .fgColor(Colors.white)
-      .drawRect(0, matrix.height()-2, width, height)
+      .drawLine(0, matrix.height()-1, width, matrix.height()-1)
       .sync();
   }
 
