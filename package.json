@@ -1,6 +1,12 @@
 {
     "name": "crypto-ticker",
+    "scripts": {
+        "sync-changes": "echo 'Changes will be pushed to Raspberry Pi' && nodemon --config nodemon.sync.json"
+    },
     "dependencies": {
-        "rpi-led-matrix": "^1.11.1"
+        "chalk": "^4.1.1",
+        "nodemon": "^2.0.7",
+        "rpi-led-matrix": "^1.11.1",
+        "rsync": "^0.6.1"
     }
 }
