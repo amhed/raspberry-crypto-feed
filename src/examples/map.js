@@ -1,7 +1,8 @@
-import { LedMatrix } from '../src';
-import { matrixOptions, runtimeOptions } from './_config';
+const {  LedMatrix } = require('rpi-led-matrix');
 
-const nextColor = (f: number, t: number): number => {
+const { matrixOptions, runtimeOptions } = require('../_config');
+
+const nextColor = (f, t) => {
   const brightness = 0xFF & Math.max(0, 255 * Math.sin(f * t / 1000));
 
   return (brightness << 16) | (brightness << 8) | brightness;
