@@ -65,7 +65,7 @@ const spin = async (matrix, speed = 50, clear = true) => {
               matrix.drawText(glyph.char, glyph.x, glyph.y);
             });
           matrix.sync();
-          await wait(400);
+          await wait(100);
         }
       }
     }

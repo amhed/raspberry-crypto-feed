@@ -13,29 +13,46 @@ const matrix = new LedMatrix(
   runtimeOptions
 );
 
-matrix
-  .clear()
-  .brightness(40)
-  .fgColor(0x0000FF)
-  .fill()
-  .fgColor(0xFFFF00)
-  .drawCircle(
-      matrix.width()/2, 
-      matrix.height()/2,
-      5
+// Sample on scrolling text
+for (let i = 0; i < 100; i++) {
+  const lines = LayoutUtils.textToLines(
+    font, matrix.width(), 'BTC 34,500'
   )
-  .drawRect(
-      matrix.width() / 4,
-      matrix.height() / 4,
-      matrix.width() / 2,
-      matrix.height() / 2
-  )
-  .fgColor({ r: 255, g: 0, b: 0 })
-  .drawLine(0, 0, matrix.width(), matrix.height())
-  .fgColor(0xFFFFFF)
-  .drawLine(matrix.width()-1, 0, 0, matrix.height()-1)
-  .sync();
 
-setTimeout(() => {
-  console.log('ended!');
-}, 5000);
+  LayoutUtils.linesToMappedGlyphs(
+    lines, 
+    font.height(), 
+    matrix.width(), 
+    matrix.height()
+  )
+
+  matrix
+    .clear()
+    .font(font)
+    .fgColor(Colors.orange)
+    .drawText('BTC 34,500', i*-1, 0)
+    .fgColor(Colors.cyan)
+    .drawText('ETH 1,780', 42 + (i*-1), 0)
+    .sync();
+
+  await wait(100);
+}
+
+// Static
+const lines = LayoutUtils.textToLines(
+  font, matrix.width(), 'BTC 34,500'
+)
+
+LayoutUtils.linesToMappedGlyphs(
+  lines, 
+  font.height(), 
+  matrix.width(), 
+  matrix.height(),
+  HorizontalAlignment.Left,
+  VerticalAlignment.Top
+).map(glyph => {
+  matrix
+    .fgColor(Colors.orange)
+    .drawText(glyph.char, glyph.x, glyph.y)
+    .sync();
+});
