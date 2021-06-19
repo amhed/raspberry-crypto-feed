@@ -6,24 +6,16 @@ const {
     Font 
 } = require('rpi-led-matrix');
 
+const { matrixOptions, runtimeOptions } = require('./_config')
+
 const matrix = new LedMatrix(
-    {
-        ...LedMatrix.defaultMatrixOptions(),
-        rows: 16,
-        cols: 32,
-        chainLength: 1,
-        hardwareMapping: GpioMapping.AdafruitHat,
-        pixelMapperConfig: LedMatrixUtils.encodeMappers({type: PixelMapperType.U})
-    },
-    {
-        ...LedMatrix.defaultRuntimeOptions(),
-        gpioSlowdown: 1
-    }
+    matrixOptions,
+    runtimeOptions
 );
 
 matrix
     .clear()
-    .brightness(10)
+    .brightness(40)
     .fgColor(0x0000FF)
     .fill()
     .fgColor(0xFFFF00)

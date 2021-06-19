@@ -1,7 +1,8 @@
 {
     "name": "crypto-ticker",
     "scripts": {
-        "sync-changes": "echo 'Changes will be pushed to Raspberry Pi' && nodemon --config nodemon.sync.json"
+        "start": "echo 'Source will rebuild on changes' && nodemon --config nodemon.build.json",
+        "sync": "echo 'Changes will be pushed to Raspberry Pi' && nodemon --config nodemon.sync.json"
     },
     "dependencies": {
         "chalk": "^4.1.1",

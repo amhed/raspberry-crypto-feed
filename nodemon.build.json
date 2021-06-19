@@ -1,0 +1,12 @@
+{
+  "ext": "ts,js,json,cc,h,gyp",
+  "exec": "sudo \"$(which node)\" src/index.js",
+  "restartable": true,
+  "events": {},
+  "watch": [
+    "src/**",
+    "examples/**",
+    "package.json",
+    "binding.gyp"
+  ]
+}
