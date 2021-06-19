@@ -1,1 +1,1 @@
-require('./examples/kitchen-sink')
+require('./examples/scratch')

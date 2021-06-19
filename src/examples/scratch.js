@@ -6,7 +6,7 @@ const {
   Font 
 } = require('rpi-led-matrix');
 
-const { matrixOptions, runtimeOptions } = require('./_config')
+const { matrixOptions, runtimeOptions } = require('../_config')
 
 const matrix = new LedMatrix(
   matrixOptions,

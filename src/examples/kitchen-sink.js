@@ -55,7 +55,7 @@ const spin = async (matrix, speed = 50, clear = true) => {
       // Text positions
       const font = new Font('helvR12', `${process.cwd()}/fonts/helvR12.bdf`);
       matrix.font(font);
-      const lines = LayoutUtils.textToLines(font, matrix.width(), 'Hello, matrix!');
+      const lines = LayoutUtils.textToLines(font, matrix.width(), 'TU PAPA!!');
 
       for (const alignmentH of [HorizontalAlignment.Left, HorizontalAlignment.Center, HorizontalAlignment.Right]) {
         for (const alignmentV of [VerticalAlignment.Top, VerticalAlignment.Middle, VerticalAlignment.Bottom]) {
