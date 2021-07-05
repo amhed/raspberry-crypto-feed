@@ -14,5 +14,5 @@ const Colors = {
 
 module.exports = {
   Colors,
-  defaultFont: new Font('helvR12', `${process.cwd()}/fonts/4x6.bdf`)
+  defaultFont: new Font('4x6', `${process.cwd()}/fonts/4x6.bdf`)
 }

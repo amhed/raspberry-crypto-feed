@@ -2,10 +2,11 @@ const {
   LedMatrix, LedMatrixInstance, Font, LayoutUtils, HorizontalAlignment, VerticalAlignment
 } = require('rpi-led-matrix');
 const { matrixOptions, runtimeOptions } = require('./_config');
-const { Colors, defaultFont } = require('./constants')
+const { Colors } = require('./constants')
 const { useStatusBar } = require('./components/StatusBar');
 const { setTickerDisplay } = require('./components/TickerDisplay');
 const { registerExitHandler, resetScreen, pauseFor } = require('./helpers');
+const { getNextTickerPrice } = require('./cryptofeed');
 const _ = require('lodash');
 
 // Start "game loop" 
@@ -18,9 +19,12 @@ const _ = require('lodash');
 
   const nextTick = async () => {
     // get current price for ticker
-    setTickerDisplay(matrix, 'BTC', _.random(30000, 35000));
+    const {key, value, color: currencyColor} = await getNextTickerPrice();
     
-    // update status bar until next update
+    console.log(key, value, currencyColor);
+    setTickerDisplay(matrix, key, value, currencyColor);
+
+    // update status bar until next tick
     setStatus(0);
     let pct = 0;
     while (pct < 1) {
@@ -30,7 +34,7 @@ const _ = require('lodash');
 
     matrix
       .clear()
-      .brightness(40)
+      .brightness(80)
       .bgColor(Colors.black)
       .fgColor(Colors.black)
       .fill()

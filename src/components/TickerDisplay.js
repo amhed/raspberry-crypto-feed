@@ -1,13 +1,19 @@
 const { LayoutUtils, HorizontalAlignment, VerticalAlignment } = require('rpi-led-matrix');
-const { Colors, defaultFont } = require('../constants');
+const { defaultFont } = require('../constants');
 const { BigNumber } = require('bignumber.js');
 
-const setTickerDisplay = (matrix, ticker, price) => {
-  const formattedPrice = new BigNumber(price).toFormat(0);
-  const lines = LayoutUtils.textToLines(
+const setTickerDisplay = (matrix, ticker, price, color) => {
+  const formattedPrice = new BigNumber(price).toFormat(price > 1000 ? 0 : 2);
+  let lines = LayoutUtils.textToLines(
     defaultFont, matrix.width(), `${ticker} ${formattedPrice}`
   )
+  if (lines.length === 1) {
+    const first = LayoutUtils.textToLines(defaultFont, matrix.width(), ticker);
+    const second = LayoutUtils.textToLines(defaultFont, matrix.width(), formattedPrice);
+    lines = [...first, ...second]
+  }
 
+  matrix.clear();
   LayoutUtils.linesToMappedGlyphs(
     lines,
     defaultFont.height(),
@@ -18,7 +24,7 @@ const setTickerDisplay = (matrix, ticker, price) => {
   ).map(glyph => {
     matrix
       .font(defaultFont)
-      .fgColor(Colors.orange)
+      .fgColor(color)
       .drawText(glyph.char, glyph.x + 2, glyph.y + 2)
       .sync();
   });
